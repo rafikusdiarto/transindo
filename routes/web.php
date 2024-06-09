@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\MenuCategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RedirectController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\MenuCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/redirect', [RedirectController::class, 'index']);
 
-Route::middleware('auth')->group(function() {
+Route::middleware(['auth', 'role:merchant'])->group(function() {
     Route::get('/merchant/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
     Route::controller(MenuCategoryController::class) -> group(function(){
         Route::get('/merchant/all-category', 'Index')->name('allcategory');
@@ -31,7 +32,7 @@ Route::middleware('auth')->group(function() {
         Route::post('/merchant/update-category', 'UpdateCategory')->name('updatecategory');
         Route::get('/merchant/delete-category/{id}', 'DeleteCategory')->name('deletecategory');
     });
-
+    Route::resource('menu', MenuController::class);
 });
 
 Route::get('/customer/dashboard', [App\Http\Controllers\User\DashboardController::class, 'index']);

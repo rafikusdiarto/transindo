@@ -34,6 +34,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Category Name</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">

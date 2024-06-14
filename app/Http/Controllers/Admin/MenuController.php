@@ -89,13 +89,14 @@ class MenuController extends Controller
             $menu = Menu::findOrFail($id);
 
             if ($request->hasFile('img')) {
-                $img = $menu->img;
-                if (file_exists($img)) {
-                    unlink($img);
+                $relativePath = str_replace(url('/'), '', $menu->img);
+                $filePath = public_path($relativePath);
+                if (file_exists($filePath)) {
+                    unlink($filePath);
                 }
                 $file = $request->file('img');
                 $fileName = $file->getClientOriginalName();
-                $filePath = url(). 'img/menu/' . $fileName;
+                $filePath = 'img/menu/' . $fileName;
                 $file->move('img/menu', $fileName);
             } else{
                 $filePath = $menu->img;
@@ -104,7 +105,7 @@ class MenuController extends Controller
             $menu->update([
                 'title' => $request->title,
                 'menu_category_id' => $request->menu_category_id,
-                'img' => $filePath,
+                'img' => url($filePath),
                 'price' => $request->price,
                 'stock' => $request->stock,
                 'description' => $request->description,
@@ -119,10 +120,11 @@ class MenuController extends Controller
     {
         try {
             $menu = Menu::findOrFail($id);
-            if (file_exists($menu->img)) {
-                unlink($menu->img);
+            $relativePath = str_replace(url('/'), '', $menu->img);
+            $filePath = public_path($relativePath);
+            if (file_exists($filePath)) {
+                unlink($filePath);
             }
-
             $menu->delete();
             return redirect()->back()->with('success', 'menu successfully delete');
         } catch (\Throwable $th) {

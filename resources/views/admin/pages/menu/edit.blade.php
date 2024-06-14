@@ -35,7 +35,7 @@
                         <select class="form-select" aria-label="Default select example" id="menu_category_id" name="menu_category_id">
                             <option selected>Select Menu Category</option>
                             @foreach ($getCategories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}" {{ $category->id == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="row justify-content-end">
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Update Category</button>
+                    <button type="submit" class="btn btn-primary">Update Menu</button>
                   </div>
                 </div>
               </form>

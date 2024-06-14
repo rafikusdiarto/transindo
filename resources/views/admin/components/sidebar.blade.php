@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-      <a href="index.html" class="app-brand-link">
+      <a href="/merchant/dashboard" class="app-brand-link">
         <span class="app-brand-logo demo">
           <svg
             width="25"
@@ -56,7 +56,7 @@
             </g>
           </svg>
         </span>
-        <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+        <span class="text-uppercase fs-5 demo uppercase fw-bolder ms-2">Transindo</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -68,27 +68,27 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
-      <li class="menu-item active">
-        <a href="index.html" class="menu-link">
+      <li class="menu-item {{Request::segment(2) == 'dashboard' ? 'active' : ''}}">
+        <a href="/merchant/dashboard" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div data-i18n="Analytics">Dashboard</div>
         </a>
       </li>
 
       <!-- Layouts -->
-      <li class="menu-item">
+      <li class="menu-item {{Request::segment(2) == 'categories' ||Request::segment(2) ==  'menu'? 'active' : ''}}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons bx bx-layout"></i>
           <div data-i18n="Layouts">Menu</div>
         </a>
 
         <ul class="menu-sub">
-          <li class="menu-item">
+          <li class="menu-item {{Request::segment(2) == 'categories' ? 'active' : ''}}"">
             <a href="{{route('allcategory')}}" class="menu-link">
               <div data-i18n="Without menu">Menu Categories</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="menu-item {{Request::segment(2) == 'menu' ? 'active' : ''}}"">
             <a href="{{route('menu.index')}}" class="menu-link">
               <div data-i18n="Without navbar">All Menu</div>
             </a>
